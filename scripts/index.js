@@ -6,10 +6,12 @@ window.onload = function () {
 };
 
 //inputs
-const rentDaysEl = document.getElementById("rentDays");
+//const rentDaysEl = +document.getElementById("rentDays").value;
 
 //output
 function onTotalCostClick() {
+  const rentDaysEl = +document.getElementById("rentDays").value;
+
   const rentalOptions = document.querySelectorAll("input:checked");
 
   let extraPerDay = 0;
@@ -32,19 +34,19 @@ function onTotalCostClick() {
     rentPay += 30;
   }
 
-  const basicRental = +rentDaysEl.value * 29.99;
+  const basicRental = rentDaysEl * 29.99;
   const agePrice = (rentPay / 100) * basicRental;
-  const optionsPrice = extraPerDay * +rentDaysEl.value;
+  const optionsPrice = extraPerDay * rentDaysEl;
   const totalDue = basicRental + optionsPrice + agePrice;
 
   const carRentalEl = document.getElementById("carRental");
   carRentalEl.innerHTML = `Car Rental: $${basicRental}`;
 
   const optChoiceEl = document.getElementById("optChoice");
-  optChoiceEl.innerHTML = `Options: $${extraPerDay}`;
+  optChoiceEl.innerHTML = `Options: $${extraPerDay.toFixed(2)}`;
 
   const areYou25El = document.getElementById("areYou25");
-  areYou25El.innerHTML = `Under 25 surcharge: $${rentPay}%`;
+  areYou25El.innerHTML = `Under 25 surcharge: $${agePrice.toFixed(2)}`;
 
   const dueAmountEl = document.getElementById("dueAmount");
   dueAmountEl.innerHTML = `Total due: $${totalDue.toFixed(2)}`;
